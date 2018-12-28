@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.shilong.dao.PersonMapper">
+  
+  <resultMap type="com.shilong.beans.Person" id="personList">
+  		<id column="id" property="id"/>
+  		<result column="name" property="name"/>
+  		<result column="age" property="age"/>
+  		<result column="birth" property="birth"/>
+  		<result column="registerTime" property="registerTime"/>
+  		<result column="salary" property="salary"/>
+  </resultMap>
+  
+  	<insert id="add" parameterType="com.shilong.beans.Person">
+  		 insert into tbl_person(name,age,birth,registerTime,salary)
+  		 values(#{name},#{age},#{birth},#{registerTime},#{salary});
+  	</insert>
+  	
+  	<delete id="delete" parameterType="Integer">
+  		delete from tbl_person where id = #{id};
+  	</delete>
+  	
+  	<update id="update" parameterType="com.shilong.beans.Person">
+  		update tbl_person set 
+  		
+  		name = #{name} , 
+  		age = #{age},
+  		birth= #{birth}, 
+  		registerTime= #{registerTime},
+  		salary = #{salary}
+  		
+  		where id = #{id};
+  	</update>
+  	
+  	<select id="getPersonById" parameterType="Integer" resultType="com.shilong.beans.Person">
+  		select id,name,age,birth,registerTime,salary 
+  		from tbl_person 
+  		where id = #{id};
+  	</select>
+  	
+  	<select id="getAllPerson" resultMap="personList">
+  		select * from tbl_person;
+  	</select>
+  </mapper>
