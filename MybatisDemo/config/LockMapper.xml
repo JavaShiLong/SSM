@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shilong.dao.LockMapper">
+
+	<resultMap type="Lock" id="lockmap">
+		<id column="id" property="id"/>
+		<result column="lockName" property="lockName"/>
+		<!-- 自动封装级联属性 -->
+		<association property="key" column="key_id" javaType="Key" select="com.shilong.dao.KeyMapper.getKeyById" />
+	</resultMap>
+
+	<select id="getLockById" parameterType="Integer" resultMap="lockmap">
+		SELECT * FROM tbl_lock where id = #{id}
+	</select>
+</mapper>

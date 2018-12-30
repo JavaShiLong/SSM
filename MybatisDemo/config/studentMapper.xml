@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shilong.dao.StudentMapper">
+
+	<select id="getStuByAge" parameterType="Student" resultType="Student">
+		SELECT * FROM tbl_student
+		<where>
+			<if test="age>22">
+				age > #{age}
+			</if>
+			<if test="score!=76">
+				AND score > #{score}
+			</if>
+			<if test="name!=null  and !name.equals('')">
+				AND name LIKE concat('%',#{name},'%')
+			</if>
+		</where>
+	</select>
+	
+	<update id="updateStu" parameterType="Student">
+		<if test="id!=null">
+			<trim prefix="UPDATE tbl_student" suffixOverrides=",">
+					<!--  SET `name` = ? , score = ? , birth = ? , age = ? WHERE id = ? -->
+					<set>
+						<if test="name!=null">
+								name = #{name},
+						</if>
+						<if test="score>0">
+							score=#{score},
+						</if>
+						<if test="birth!=null">
+							birth=#{birth},
+						</if>
+						<if test="age>0">
+							age=#{age}
+						</if>
+					</set>
+					<where>
+						id=#{id}
+					</where>
+			</trim>
+		</if>
+	</update>
+
+</mapper>

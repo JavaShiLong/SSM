@@ -76,6 +76,11 @@ public class MybatisTest {
 	}
 	
 	@Test
+	public void deleteByTwo(){
+		mapper.deleteByTwo(4, 22);
+	}
+	
+	@Test
 	public void delete(){
 		mapper.delete(2);
 	}
@@ -91,6 +96,7 @@ public class MybatisTest {
 		    person.setSalary(4500.55);
 		    
 		    mapper.add(person);
+		    System.out.println(person.getId());
 	}
 
 }

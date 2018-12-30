@@ -6,26 +6,39 @@
 
 <configuration>
 
+
+
 	<!-- 引入外部文件 -->
 	<properties resource="dbconfig.properties"></properties>
 
-	<environments default="development" > <!-- 表示使用哪個环境 -->
-	
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="false" />
+	</settings>
+
+	<typeAliases>
+		<package name="com.shilong.beans" />
+	</typeAliases>
+	<environments default="development"> <!-- 表示使用哪個环境 -->
+
 		<environment id="development"> <!-- 某个环境 -->
-		
+
 			<transactionManager type="JDBC" /><!-- 写死的东西 -->
-			
+
 			<dataSource type="POOLED"> <!-- 表示使用池子 -->
 				<property name="driver" value="${jdbc.driver}" />
-				<property name="url"
-					value="${jdbc.url}" />
+				<property name="url" value="${jdbc.url}" />
 				<property name="username" value="${jdbc.username}" />
 				<property name="password" value="${jdbc.password}" />
 			</dataSource>
 		</environment>
 	</environments>
 
+
 	<mappers>
 		<mapper resource="PersonMapper.xml" />
+		<mapper resource="studentMapper.xml" />
+		<mapper resource="KeyMapper.xml" />
+		<mapper resource="LockMapper.xml" />
 	</mappers>
 </configuration>
